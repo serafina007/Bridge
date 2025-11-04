@@ -21,12 +21,10 @@ def sign_message(challenge, filename="secret_key.txt"):
 
     # TODO recover your account information for your private key and sign the given challenge
     # Use the code from the signatures assignment to sign the given challenge
-    
+    acct = eth_account.Account.from_key(key)
+    eth_addr = acct.address
 
-
-
-
-
+    signed_message = acct.sign_message(message)
     assert eth_account.Account.recover_message(message,signature=signed_message.signature.hex()) == eth_addr, f"Failed to sign message properly"
 
     #return signed_message, account associated with the private key
